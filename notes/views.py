@@ -1,8 +1,10 @@
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404
 from .models import Note,Product,Task
-from rest_framework.generics import ListCreateAPIView,viewsets
+from rest_framework.generics import ListCreateAPIView 
+from rest_framework import viewsets
 from .serializers import NoteSerializer,TaskSerializer
+
 
 
 # def note_list(request):

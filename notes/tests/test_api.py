@@ -64,3 +64,4 @@ def test_completed_tasks():
     
     assert responce.status_code == status.HTTP_201_CREATED
     assert responce.data["description"] == f"Создан в {that_time}"
+    assert responce.data["completed"] is True

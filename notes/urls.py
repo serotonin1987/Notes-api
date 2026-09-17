@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path,include
 from .views import NoteListView, TaskViewSet# Оставляем только то, что реально есть в views.py
-from rest_framework import DefaultRouter
+from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r"tasks",TaskViewSet,basename= "task")
@@ -11,4 +11,5 @@ urlpatterns = [
     # path("products/", product_list, name="product-list"),
     # path("task/", task, name="task-list"),
     path("notes/", NoteListView.as_view(), name="note-list"),
+    path("", include(router.urls))
 ]
