@@ -1,5 +1,9 @@
 from django.urls import path
-from .views import NoteListView  # Оставляем только то, что реально есть в views.py
+from .views import NoteListView, TaskViewSet# Оставляем только то, что реально есть в views.py
+from rest_framework import DefaultRouter
+
+router = DefaultRouter()
+router.register(r"tasks",TaskViewSet,basename= "task")
 
 urlpatterns = [
     # path("notes/", note_list, name="note-list"),

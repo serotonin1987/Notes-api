@@ -1,6 +1,7 @@
 from rest_framework.test import APIClient
 from rest_framework import status
 from notes.models import Note
+from tasks.models import Task
 from datetime import datetime
 import pytest
 
@@ -29,7 +30,6 @@ def test_create_note():
     
     response = client.post("/api/notes/", data=payload, format="json")
     
-    # Проверки (Assertions)
     assert response.status_code == status.HTTP_201_CREATED
     assert Note.objects.count() == 1
     assert response.data["title"] == "Новая заметка"
@@ -48,3 +48,19 @@ def test_create_at():
 
     assert responce.status_code == status.HTTP_201_CREATED
     assert responce.data["description"] == f"Создан в {this_time}"
+
+@pytest.mark.django_db
+def test_completed_tasks():
+    client = APIClient()
+    that_time = datetime.now().strftime("%H:%M:%S")
+    payload = {
+        "title":"Новая заметка",
+        "text":"текст заметки",
+        "description":f"Создан в {that_time}",
+        "completed":True,
+    }
+
+    responce =client.post("/api/tasks/", data=payload, format="json")
+    
+    assert responce.status_code == status.HTTP_201_CREATED
+    assert responce.data["description"] == f"Создан в {that_time}"

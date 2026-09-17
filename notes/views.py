@@ -1,8 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import get_list_or_404
-from .models import Note,Product
-from rest_framework.generics import ListCreateAPIView
-from .serializers import NoteSerializer
+from .models import Note,Product,Task
+from rest_framework.generics import ListCreateAPIView,viewsets
+from .serializers import NoteSerializer,TaskSerializer
+
 
 # def note_list(request):
 #     if request.method != "GET":
@@ -37,3 +38,7 @@ def product_list(request):
 class NoteListView(ListCreateAPIView):
     queryset = Note.objects.all()
     serializer_class = NoteSerializer
+
+class TaskViewSet(viewsets.ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
