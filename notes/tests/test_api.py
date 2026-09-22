@@ -47,7 +47,7 @@ def test_create_at():
     responce =client.post("/api/notes/", data=payload, format="json")
 
     assert responce.status_code == status.HTTP_201_CREATED
-    assert responce.data["description"] == f"Создан в {}"
+    assert responce.data["description"] == f"Создан в {this_time}"
 
 @pytest.mark.django_db
 def test_completed_tasks():
